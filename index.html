@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco - Gerador de Arquivo para Débito Automático em Conta Corrente</title>
+</head>
+
+<body>
+    <form action="index.php" enctype="multipart/form-data" method="post" name="form">
+        <table border='1'>
+            <tr>
+                <td><a href="index.php?download=sim">Baixar planilha de modelo</a></td>
+            </tr>
+            <tr>
+                <td><input type="file" name="arquivo" /></td>
+            </tr>
+            <tr>
+                <td><input type="button" name="btnEnviar" onclick="valida()" value="Iniciar" /></td>
+            </tr>
+        </table>
+    </form>
+    <script type="text/javascript">
+        function valida() {
+            if (form.arquivo.value.length == 0) {
+                alert("Arquivo não selecionado!");
+                form.arquivo.focus();
+            } else {
+                arquivo = form.arquivo.value;
+                extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase();
+                if ((extensao == '.xlsx') || (extensao == '.zip')) {
+                    document.forms["form"].submit();
+                    form.arquivo.disabled = true;
+                    form.btnEnviar.disabled = true;
+                } else {
+                    alert("Arquino não permitido. Somente extensão XLSX ou ZIP");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
